@@ -80,6 +80,32 @@ O inicializador procura primeiro o Node portátil em `%LOCALAPPDATA%/Nexo/tools/
 
 Não é necessário iniciar os serviços de backend para usar notas e quadros locais.
 
+## Deploy na Vercel
+
+O arquivo [`vercel.json`](vercel.json) configura o build estático e o fallback das
+rotas do aplicativo. Para publicar:
+
+1. Importe `RafaelADSdev/NotionOS` em um novo projeto da Vercel.
+2. Mantenha a raiz do repositório como **Root Directory** e o preset **Other**.
+3. Selecione **Node.js 22.x**. Os comandos de instalação, build e a pasta de saída
+   são definidos automaticamente pelo `vercel.json`.
+4. Execute o deploy. Não são necessários banco de dados ou credenciais de nuvem.
+
+Para testar o mesmo build localmente, depois de instalar as dependências:
+
+```sh
+node scripts/nexo/build-web.mjs
+```
+
+O script prepara os modelos e compila `@affine/web` em modo de produção, com os
+assets no próprio domínio. A saída fica em `packages/frontend/apps/web/dist`.
+Os hooks de instalação dos clientes desktop e do backend não são executados
+nesse fluxo; apenas o aplicativo web estático é publicado.
+
+**As notas continuam locais ao navegador.** Publicar na Vercel não habilita
+sincronização. Para levar notas do `localhost` ao domínio publicado, exporte-as
+no ambiente antigo e importe-as no novo.
+
 ## Seus dados e backups
 
 Os documentos ficam no armazenamento do navegador, vinculados ao perfil e à origem em que o aplicativo foi aberto. Limpar os dados do site, trocar de perfil, navegador ou porta pode fazer seus documentos deixarem de aparecer naquele endereço.

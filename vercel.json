@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "node .yarn/releases/yarn-4.18.0.cjs install --immutable --mode=skip-build",
+  "buildCommand": "node scripts/nexo/build-web.mjs",
+  "outputDirectory": "packages/frontend/apps/web/dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
