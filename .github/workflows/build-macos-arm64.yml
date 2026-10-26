@@ -62,8 +62,13 @@ jobs:
           ditto packages/frontend/apps/electron-renderer/dist packages/frontend/apps/electron/resources/web-static
       - name: Prepare isolated packaging dependencies
         run: |
+          # Yarn cannot relocate the downloaded macOS framework's symlinks.
+          # Packager downloads a fresh target Electron archive itself.
+          rm -rf node_modules/electron/dist
           yarn config set nmHoistingLimits workspaces
-          yarn workspaces focus @affine/electron @affine/monorepo @affine/nbstore @toeverything/infra
+          ELECTRON_SKIP_BINARY_DOWNLOAD=1 yarn workspaces focus @affine/electron @affine/monorepo @affine/nbstore @toeverything/infra
+          rm -rf packages/frontend/apps/electron/node_modules/@affine/nbstore/node_modules/@blocksuite
+          rm -rf packages/frontend/apps/electron/node_modules/@affine/native/node_modules
       - name: Package macOS ARM64 application
         env:
           SKIP_GENERATE_ASSETS: '1'
