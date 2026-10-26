@@ -3,7 +3,7 @@ name: Build macOS ARM64 installer
 on:
   workflow_dispatch:
   push:
-    branches: [codex/build-macos-arm64]
+    branches: [codex/macos-installer]
     paths: [.github/workflows/build-macos-arm64.yml]
 
 permissions:
@@ -29,15 +29,41 @@ jobs:
         with:
           corepack-install: 'true'
           hard-link-nm: 'false'
-          nmHoistingLimits: workspaces
           extra-flags: workspaces focus @affine/electron @affine/electron-renderer @affine/monorepo @affine/nbstore @toeverything/infra
+      - name: Compile desktop interface
+        run: yarn affine @affine/electron-renderer build
+      - name: Restore compiled native modules
+        id: native-cache
+        uses: actions/cache/restore@v6
+        with:
+          key: macos-arm64-native-${{ hashFiles('Cargo.lock', 'rust-toolchain.toml', '.cargo/config.toml', '**/*.rs', '**/Cargo.toml') }}
+          path: |
+            packages/frontend/native/affine.darwin-arm64.node
+            packages/frontend/native/index.js
+            packages/frontend/native/index.d.ts
       - name: Compile native ARM64 modules
+        if: steps.native-cache.outputs.cache-hit != 'true'
         uses: ./.github/actions/build-rust
         with:
           target: aarch64-apple-darwin
           package: '@affine/native'
-      - name: Compile desktop application
-        run: yarn affine @affine/electron generate-assets
+      - name: Save compiled native modules
+        if: steps.native-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          key: ${{ steps.native-cache.outputs.cache-primary-key }}
+          path: |
+            packages/frontend/native/affine.darwin-arm64.node
+            packages/frontend/native/index.js
+            packages/frontend/native/index.d.ts
+      - name: Compile desktop layers and copy interface
+        run: |
+          yarn affine @affine/electron build
+          ditto packages/frontend/apps/electron-renderer/dist packages/frontend/apps/electron/resources/web-static
+      - name: Prepare isolated packaging dependencies
+        run: |
+          yarn config set nmHoistingLimits workspaces
+          yarn workspaces focus @affine/electron @affine/monorepo @affine/nbstore @toeverything/infra
       - name: Package macOS ARM64 application
         env:
           SKIP_GENERATE_ASSETS: '1'
