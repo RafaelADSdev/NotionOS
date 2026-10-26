@@ -1,0 +1,69 @@
+name: Build macOS ARM64 installer
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/build-macos-arm64]
+    paths: [.github/workflows/build-macos-arm64.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  installer:
+    runs-on: macos-15
+    timeout-minutes: 90
+    env:
+      BUILD_TYPE: stable
+      AFFINE_UNSIGNED_PACKAGE: '1'
+      MACOSX_DEPLOYMENT_TARGET: '12.0'
+      YARN_ENABLE_SCRIPTS: 'true'
+      NODE_OPTIONS: --max-old-space-size=10000
+      HUSKY: '0'
+    steps:
+      - uses: actions/checkout@v7
+      - name: Verify Apple Silicon runner
+        run: test "$(uname -m)" = arm64
+      - name: Install Node.js and dependencies
+        uses: ./.github/actions/setup-node
+        with:
+          corepack-install: 'true'
+          hard-link-nm: 'false'
+          nmHoistingLimits: workspaces
+          extra-flags: workspaces focus @affine/electron @affine/electron-renderer @affine/monorepo @affine/nbstore @toeverything/infra
+      - name: Compile native ARM64 modules
+        uses: ./.github/actions/build-rust
+        with:
+          target: aarch64-apple-darwin
+          package: '@affine/native'
+      - name: Compile desktop application
+        run: yarn affine @affine/electron generate-assets
+      - name: Package macOS ARM64 application
+        env:
+          SKIP_GENERATE_ASSETS: '1'
+          HOIST_NODE_MODULES: '1'
+        run: yarn affine @affine/electron package --platform=darwin --arch=arm64
+      - name: Verify architecture and create installer
+        run: |
+          set -euo pipefail
+          app="packages/frontend/apps/electron/out/stable/AFFiNE-darwin-arm64/AFFiNE.app"
+          test -f "$app/Contents/Resources/app.asar"
+          lipo -verify_arch arm64 "$app/Contents/MacOS/AFFiNE"
+          lipo -verify_arch arm64 packages/frontend/native/affine.darwin-arm64.node
+          codesign --force --deep --sign - "$app"
+          codesign --verify --deep --strict "$app"
+          mkdir -p installer-staging
+          ditto "$app" installer-staging/AFFiNE.app
+          ln -s /Applications installer-staging/Applications
+          hdiutil create -volname Nexo -srcfolder installer-staging -ov -format UDZO Nexo-macOS-arm64.dmg
+          hdiutil verify Nexo-macOS-arm64.dmg
+          shasum -a 256 Nexo-macOS-arm64.dmg > Nexo-macOS-arm64.dmg.sha256
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Nexo-macOS-arm64
+          path: |
+            Nexo-macOS-arm64.dmg
+            Nexo-macOS-arm64.dmg.sha256
+          if-no-files-found: error
+          retention-days: 14
