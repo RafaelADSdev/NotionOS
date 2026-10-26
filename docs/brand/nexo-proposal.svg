@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-label="Identidade Nexo em roxo, preto e branco">
+<rect width="1200" height="600" fill="#0C0C0F"/>
+<g transform="translate(64 72) scale(1.5)">
+  <rect x="1" y="1" width="102" height="102" rx="25" fill="#0B0B0F" stroke="#3B2D55" stroke-width="2"/>
+  <path d="M27 77V27H40L65 55V27H78V77H65L40 49V77Z" fill="#FFFFFF"/>
+  <path d="M27 27H40L78 69V77H65L27 35Z" fill="#A78BFA"/>
+
+</g>
+<g fill="none" stroke="#FFFFFF" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" transform="translate(120 74) scale(3)"><path d="M56 35V17M56 24C56 12 75 12 75 25V35"/><path d="M85 25H104C104 12 84 12 84 26C84 38 99 39 105 32"/><path d="M117 17L135 35M135 17L117 35"/><path d="M166 26C166 12 145 12 145 26C145 40 166 40 166 26Z"/></g>
+<g font-family="Inter, Segoe UI, sans-serif" fill="#FFFFFF"><text x="64" y="300" font-size="30">Suas ideias encontram lugar.</text><text x="64" y="344" font-size="18" fill="#B6B1C0">Um espaço local para notas, quadros e conexões.</text>
+<rect x="64" y="408" width="320" height="84" rx="12" fill="#7C3AED"/><rect x="404" y="408" width="320" height="84" rx="12" fill="#0C0C0F" stroke="#44384F"/><rect x="744" y="408" width="392" height="84" rx="12" fill="#FFFFFF"/>
+<text x="64" y="528" font-size="16">Roxo · #7C3AED</text><text x="404" y="528" font-size="16">Preto · #0C0C0F</text><text x="744" y="528" font-size="16">Branco · #FFFFFF</text></g></svg>

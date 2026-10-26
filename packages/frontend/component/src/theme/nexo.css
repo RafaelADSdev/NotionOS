@@ -1,0 +1,86 @@
+/* Brand the application chrome without remapping user-authored block colors. */
+:root,
+:root[data-theme='light'] {
+  --affine-brand-color: #7c3aed;
+  --affine-primary-color: #7c3aed;
+  --affine-primary-color-04: rgb(124 58 237 / 6%);
+  --affine-link-color: #6d28d9;
+  --affine-background-primary-color: #ffffff;
+  --affine-background-secondary-color: #f7f7fa;
+  --affine-background-tertiary-color: #efedf4;
+  --affine-background-overlay-panel-color: #ffffff;
+  --affine-text-primary-color: #17151c;
+  --affine-text-secondary-color: #625d6b;
+  --affine-border-color: #e5e1eb;
+  --affine-icon-color: #625d6b;
+  --affine-hover-color: rgb(124 58 237 / 7%);
+  --affine-v2-button-primary: #7c3aed;
+  --affine-v2-button-secondary: #f1eef7;
+  --affine-v2-text-primary: #17151c;
+  --affine-v2-text-secondary: #625d6b;
+  --affine-v2-text-tertiary: #716a7c;
+  --affine-v2-text-link: #6d28d9;
+  --affine-v2-text-emphasis: #6d28d9;
+  --affine-v2-icon-primary: #37313f;
+  --affine-v2-icon-secondary: #625d6b;
+  --affine-v2-icon-activated: #6d28d9;
+  --affine-v2-layer-background-primary: #ffffff;
+  --affine-v2-layer-background-secondary: #f7f7fa;
+  --affine-v2-layer-background-tertiary: #efedf4;
+  --affine-v2-layer-background-overlayPanel: #ffffff;
+  --affine-v2-layer-background-hoverOverlay: rgb(124 58 237 / 6%);
+  --affine-v2-layer-insideBorder-border: #e5e1eb;
+  --affine-v2-layer-insideBorder-primaryBorder: #d1c6e2;
+  --nexo-sidebar-background: #f7f7fa;
+  --nexo-active-background: #ede5fc;
+  --nexo-active-foreground: #5b21b6;
+  --nexo-selection: #dfd0fc;
+  --nexo-selection-text: #211236;
+  --nexo-notice-background: #f1ebfc;
+  --nexo-notice-foreground: #5b21b6;
+}
+
+:root[data-theme='dark'] {
+  --affine-brand-color: #b69aff;
+  --affine-primary-color: #b69aff;
+  --affine-primary-color-04: rgb(167 139 250 / 8%);
+  --affine-link-color: #b69aff;
+  --affine-background-primary-color: #0c0c0f;
+  --affine-background-secondary-color: #141418;
+  --affine-background-tertiary-color: #1d1b23;
+  --affine-background-overlay-panel-color: #19171f;
+  --affine-text-primary-color: #fafafa;
+  --affine-text-secondary-color: #b6b1c0;
+  --affine-border-color: #2b2832;
+  --affine-icon-color: #b6b1c0;
+  --affine-hover-color: rgb(167 139 250 / 9%);
+  --affine-v2-button-primary: #7c3aed;
+  --affine-v2-button-secondary: #292330;
+  --affine-v2-text-primary: #fafafa;
+  --affine-v2-text-secondary: #b6b1c0;
+  --affine-v2-text-tertiary: #a19aa9;
+  --affine-v2-text-link: #b69aff;
+  --affine-v2-text-emphasis: #b69aff;
+  --affine-v2-icon-primary: #efecf4;
+  --affine-v2-icon-secondary: #b6b1c0;
+  --affine-v2-icon-activated: #b69aff;
+  --affine-v2-layer-background-primary: #0c0c0f;
+  --affine-v2-layer-background-secondary: #141418;
+  --affine-v2-layer-background-tertiary: #1d1b23;
+  --affine-v2-layer-background-overlayPanel: #19171f;
+  --affine-v2-layer-background-hoverOverlay: rgb(167 139 250 / 8%);
+  --affine-v2-layer-insideBorder-border: #2b2832;
+  --affine-v2-layer-insideBorder-primaryBorder: #44384f;
+  --nexo-sidebar-background: #08080a;
+  --nexo-active-background: #2a1a44;
+  --nexo-active-foreground: #d3bfff;
+  --nexo-selection: #51307e;
+  --nexo-selection-text: #ffffff;
+  --nexo-notice-background: #251b35;
+  --nexo-notice-foreground: #d3bfff;
+}
+
+::selection {
+  background: var(--nexo-selection);
+  color: var(--nexo-selection-text);
+}

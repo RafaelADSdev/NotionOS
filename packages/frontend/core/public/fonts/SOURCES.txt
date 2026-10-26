@@ -1,0 +1,20 @@
+Bundled fonts for local PDF export and Typst previews.
+
+Inter-Regular.woff, Inter-SemiBold.woff, Inter-Italic.woff,
+Inter-SemiBoldItalic.woff
+Embedded copyright: Copyright 2017-2019 The Inter project authors.
+Original font files: https://cdn.affine.pro/fonts/
+Upstream project: https://github.com/rsms/inter
+License: LICENSE-Inter.txt (SIL Open Font License 1.1).
+
+SarasaGothicCL-Regular.ttf
+Copyright (c) 2015-2025, Renzhi Li (aka. Belleve Invis).
+Portions Copyright (c) 2016 The Inter Project Authors.
+Portions Copyright (c) 2014-2021 Adobe Systems Incorporated.
+Portions Copyright (c) 2012 Google Inc.
+Original font file: https://cdn.affine.pro/fonts/SarasaGothicCL-Regular.ttf
+Upstream project: https://github.com/be5invis/Sarasa-Gothic
+License: LICENSE-Sarasa-Gothic.txt (SIL Open Font License 1.1).
+
+The application loads these files locally. The source URLs above document
+provenance and are not runtime requests.

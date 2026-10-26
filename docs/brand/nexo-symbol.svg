@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="104" height="104" viewBox="0 0 104 104" role="img" aria-label="Nexo">
+  <rect x="1" y="1" width="102" height="102" rx="25" fill="#0B0B0F" stroke="#3B2D55" stroke-width="2"/>
+  <path d="M27 77V27H40L65 55V27H78V77H65L40 49V77Z" fill="#FFFFFF"/>
+  <path d="M27 27H40L78 69V77H65L27 35Z" fill="#A78BFA"/>
+</svg>

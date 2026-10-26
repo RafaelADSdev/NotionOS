@@ -1,0 +1,124 @@
+{
+  "status": "implemented-local-only",
+  "objective": "Personalizar o AFFiNE como Nexo, preservando notas e quadros locais e removendo IA e recursos de nuvem conforme solicitação do usuário.",
+  "upstream": "https://github.com/toeverything/AFFiNE",
+  "baseCommit": "5f19254",
+  "proposedBrand": {
+    "name": "Nexo",
+    "tagline": "Suas ideias encontram lugar.",
+    "colors": {
+      "purple": "#7C3AED",
+      "purpleLight": "#A78BFA",
+      "black": "#0C0C0F",
+      "white": "#FFFFFF"
+    },
+    "symbol": "nexo-symbol.svg",
+    "preview": "nexo-proposal.svg",
+    "logo": "N geométrico com fita diagonal roxa e lettering vetorial próprio.",
+    "defaultTheme": "dark",
+    "themeStorageKey": "nexo-theme"
+  },
+  "implementationOrder": [
+    "Revisar a proposta de identidade com o usuário.",
+    "Preparar Node 22 e a versão do Rust definida pelo projeto.",
+    "Instalar dependências com a versão do Yarn incluída no repositório.",
+    "Aplicar nome, símbolo e cores nos pontos de apresentação do aplicativo web.",
+    "Validar editor, quadros, persistência local e identidade em temas claro e escuro."
+  ],
+  "commands": {
+    "install": "node .yarn/releases/yarn-4.18.0.cjs install",
+    "native": "node .yarn/releases/yarn-4.18.0.cjs affine @affine/native build",
+    "dev": "node .yarn/releases/yarn-4.18.0.cjs dev -p @affine/web",
+    "test": "node .yarn/releases/yarn-4.18.0.cjs test",
+    "lint": "node .yarn/releases/yarn-4.18.0.cjs lint",
+    "typecheck": "node .yarn/releases/yarn-4.18.0.cjs typecheck",
+    "localOnlyE2E": "node node_modules/playwright/cli.js test --config tests/affine-local/nexo.playwright.config.ts"
+  },
+  "structure": {
+    "web": "packages/frontend/apps/web",
+    "core": "packages/frontend/core",
+    "theme": "packages/common/theme",
+    "brandProposal": "docs/brand"
+  },
+  "codeStyle": "Preservar TypeScript, componentes, tokens e convenções do projeto. Não renomear pacotes internos nem protocolos apenas para trocar a marca.",
+  "boundaries": {
+    "always": [
+      "Preservar licenças e atribuições existentes",
+      "Manter recursos originais",
+      "Usar a infraestrutura de temas existente"
+    ],
+    "askFirst": [
+      "Publicar em domínio ou repositório do usuário",
+      "Definir provedores e credenciais de nuvem ou IA",
+      "Remover funcionalidades"
+    ],
+    "never": [
+      "Apresentar esta proposta como aplicativo em execução",
+      "Incluir segredos no repositório",
+      "Prometer serviços da nuvem original na instalação própria"
+    ]
+  },
+  "acceptanceCriteria": [
+    "Nome, logo e cores revisados pelo usuário antes da implementação da identidade.",
+    "Aplicativo web executa localmente e permite criar, editar e reabrir notas.",
+    "Quadros permanecem funcionais.",
+    "Identidade aplicada sem alterar os formatos de dados e os identificadores técnicos internos.",
+    "Verificação visual em desktop e mobile e checks relevantes passam."
+  ],
+  "environmentObserved": {
+    "node": "22.23.4; instalação local em %LOCALAPPDATA%/Nexo/tools",
+    "rust": "1.97.1 instalado em %USERPROFILE%/.cargo/bin",
+    "dependenciesInstalled": true,
+    "appRunning": true,
+    "url": "http://localhost:8081",
+    "backendRunning": false
+  },
+  "validation": {
+    "compiled": "Web app e seis workers compilados sem erros",
+    "lint": "Arquivos TypeScript alterados aprovados pelo oxlint",
+    "format": "Arquivos alterados aprovados pelo oxfmt",
+    "runtime": [
+      "Criar nota",
+      "Editar título e conteúdo",
+      "Recarregar mantendo título e conteúdo",
+      "Alternar para quadro edgeless",
+      "Carregar português em perfil novo",
+      "Carregar temas claro e escuro"
+    ],
+    "pageErrors": [],
+    "cloud": "IA, contas, sincronização e compartilhamento online desativados; teste de navegador confirma ausência de chamadas auth/graphql/telemetria.",
+    "productionBuild": "Não executado; compilação e validação em desenvolvimento",
+    "visualReview": "Revisão da interface local-only aprovada nas capturas desktop claro, desktop escuro, celular e configurações; sem correções materiais pendentes.",
+    "noticeContrast": {
+      "light": "10.29:1",
+      "dark": "9.75:1"
+    },
+    "detector": "Indisponível: arquivo interno ausente na instalação da skill. Revisão visual independente realizada.",
+    "localOnlyE2E": "Aprovado: preferência antiga de IA permanece desativada; notas criadas, editadas e persistidas; quadro, menus locais e configurações funcionais; rota antiga /chat redirecionada para /all; zero erros de página e zero chamadas auth/graphql/telemetria/socket.",
+    "purpleBranding": {
+      "primaryContrast": "5.70:1",
+      "defaultTheme": "dark",
+      "logo": "SVG geométrico e lettering vetorial; favicons rasterizados do mesmo símbolo",
+      "localOnlyE2E": "Aprovado após mudança de marca/tema; 14 segundos",
+      "pageErrors": []
+    }
+  },
+  "localOnly": true,
+  "appearanceAndLocale": {
+    "themes": [
+      "light",
+      "dark",
+      "system"
+    ],
+    "sidebarSwitch": [
+      "Claro",
+      "Escuro"
+    ],
+    "storageKey": "nexo-theme",
+    "defaultLanguage": "pt-BR",
+    "catalogKeys": 2605,
+    "catalogCoverage": 100,
+    "editorControls": "Comandos, descrições e busca em português com IDs originais preservados.",
+    "preservation": "Títulos e conteúdo dos documentos existentes não são traduzidos automaticamente."
+  }
+}
