@@ -79,8 +79,8 @@ jobs:
           set -euo pipefail
           app="packages/frontend/apps/electron/out/stable/AFFiNE-darwin-arm64/AFFiNE.app"
           test -f "$app/Contents/Resources/app.asar"
-          lipo -verify_arch arm64 "$app/Contents/MacOS/AFFiNE"
-          lipo -verify_arch arm64 packages/frontend/native/affine.darwin-arm64.node
+          lipo "$app/Contents/MacOS/AFFiNE" -verify_arch arm64
+          lipo packages/frontend/native/affine.darwin-arm64.node -verify_arch arm64
           codesign --force --deep --sign - "$app"
           codesign --verify --deep --strict "$app"
           mkdir -p installer-staging
