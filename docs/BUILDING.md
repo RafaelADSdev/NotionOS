@@ -15,8 +15,10 @@ do Brasil; a preferência de idioma pode ser alterada nas configurações.
 Para instalar novamente as dependências, use Node 22 e execute
 `node .yarn/releases/yarn-4.18.0.cjs install --immutable`.
 
-Notas e quadros usam o armazenamento do navegador. A pedido do usuário, IA,
-contas, sincronização, compartilhamento online e assinaturas estão desativados.
+Notas e quadros usam o armazenamento do navegador. Contas, sincronização,
+compartilhamento online e assinaturas do AFFiNE estão desativados. O assistente de
+texto é opcional e usa sua chave de API em Configurações → Inteligência artificial;
+veja [IA com chave própria](local-ai.md).
 Não é necessário iniciar um servidor. Use a exportação para guardar cópias
 fora do navegador. Os documentos abaixo descrevem o projeto original;
 os serviços de nuvem não fazem parte desta versão local do Nexo.

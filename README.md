@@ -16,7 +16,7 @@ Notas, quadros e conhecimento conectado em um espaço local, em português.
 
 O **Nexo**, hospedado neste repositório **NotionOS**, é uma versão personalizada do AFFiNE para escrever, organizar referências e desenvolver ideias em quadros visuais. A experiência combina um editor de documentos com uma tela livre para conectar conteúdos.
 
-Esta versão prioriza o uso local no navegador: sem cadastro, IA, sincronização em nuvem, colaboração online ou assinaturas. Novos perfis começam em português brasileiro, com tema escuro por padrão e opção de tema claro.
+Esta versão prioriza o uso local no navegador: sem cadastro, sincronização em nuvem, colaboração online ou assinaturas do AFFiNE. A IA é opcional e usa sua própria chave de API. Novos perfis começam em português brasileiro, com tema escuro por padrão e opção de tema claro.
 
 > **Estado atual:** aplicativo web para execução local. Este repositório não fornece um instalador desktop próprio. Parte da estrutura herdada contém outros aplicativos e serviços que não fazem parte do escopo local do Nexo.
 
@@ -32,6 +32,16 @@ Esta versão prioriza o uso local no navegador: sem cadastro, IA, sincronizaçã
 | **Armazenamento local**     | Manter notas e quadros no navegador, sem precisar de uma conta.          |
 
 ## Como executar
+
+Para usar o assistente, abra **Configurações → Inteligência artificial**, informe
+sua chave, a URL base da API e o modelo. Depois abra **Chat com IA** ou a aba de IA
+na lateral de uma nota. O uso é cobrado pelo seu provedor. Veja
+[IA com chave própria](docs/local-ai.md) para compatibilidade e armazenamento da chave.
+
+O assistente aceita Claude/Anthropic e APIs compatíveis com OpenAI. Pelo botão
+**+**, selecione páginas e arquivos de texto como contexto ou habilite busca na web
+com os provedores oficiais. Respostas podem virar páginas e tabelas após revisão;
+HTML gerado pode ser aberto em uma prévia isolada para apresentações e pequenos apps.
 
 ### Pré-requisitos
 

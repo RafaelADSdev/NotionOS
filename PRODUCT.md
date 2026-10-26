@@ -2,7 +2,7 @@
 
 Nexo is a personalized version of AFFiNE for notes, whiteboards and connected knowledge.
 The scope preserves the local editor, data formats, technical identifiers and existing
-browser data while changing the visible identity and disabling AI and cloud features.
+browser data while changing the visible identity and disabling upstream cloud features.
 
 The identity uses purple (#7C3AED), black (#0C0C0F), white and a folded N symbol
 with a lilac diagonal ribbon (#A78BFA). The wordmark is authored SVG lettering.
@@ -15,10 +15,18 @@ The local web application runs with Node 22.23.4 and Yarn 4.18.0. Creating and e
 notes, reloading persisted notes, switching to the edgeless whiteboard, and loading
 light and dark themes have been checked in an isolated browser profile.
 
-At the user's request, Nexo runs locally without AI, accounts, cloud synchronization,
+At the user's request, Nexo runs locally without accounts, cloud synchronization,
 online sharing, collaboration or subscription controls. Startup does not request cloud
 server configuration or authentication sessions, and telemetry transport is disabled.
-Previously saved AI preferences cannot re-enable AI. Existing notes are preserved.
+Upstream AI preferences cannot re-enable cloud AI. An optional local assistant now
+uses the user's API key with Claude's native Anthropic API or an OpenAI-compatible endpoint, without AFFiNE login
+or billing. Its chat follows the upstream empty-state composition and uses the
+original rich text renderer. It provides selected note/page/file context, writing
+actions, provider web search with citations, in-memory history, confirmed creation
+and editing of pages with Markdown blocks, and isolated HTML app/presentation previews.
+Keys stay in memory unless the user opts
+into tab session storage. See docs/local-ai.md for scope and limitations.
+Existing notes are preserved.
 Browser import/export and whiteboards remain available; local browser storage is not
 an automatic external backup. This customization does not create a desktop distribution.
 

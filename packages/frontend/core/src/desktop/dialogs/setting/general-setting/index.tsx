@@ -1,9 +1,12 @@
+import { LocalAISettings } from '@affine/core/components/local-ai/settings';
 import { UserFeatureService } from '@affine/core/modules/cloud/services/user-feature';
 import type { SettingTab } from '@affine/core/modules/dialogs/constant';
 import { FeatureFlagService } from '@affine/core/modules/feature-flag';
 import { MeetingSettingsService } from '@affine/core/modules/media/services/meeting-settings';
+import { NEXO_LOCAL_ONLY } from '@affine/env/constant';
 import { useI18n } from '@affine/i18n';
 import {
+  AiOutlineIcon,
   AppearanceIcon,
   ExperimentIcon,
   FolderIcon,
@@ -77,6 +80,14 @@ export const useGeneralSettingList = (): GeneralSettingList => {
         testId: 'shortcuts-panel-trigger',
       },
     ];
+    if (NEXO_LOCAL_ONLY) {
+      settings.push({
+        key: 'local-ai',
+        title: 'Inteligência artificial',
+        icon: <AiOutlineIcon />,
+        testId: 'local-ai-panel-trigger',
+      });
+    }
     if (loggedIn) {
       settings.push({
         key: 'notifications',
@@ -168,6 +179,8 @@ export const GeneralSetting = ({
   onChangeSettingState,
 }: GeneralSettingProps) => {
   switch (activeTab) {
+    case 'local-ai':
+      return <LocalAISettings />;
     case 'shortcuts':
       return <Shortcuts />;
     case 'notifications':

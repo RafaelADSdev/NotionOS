@@ -12,6 +12,7 @@ import { useAppSettingHelper } from '@affine/core/components/hooks/affine/use-ap
 import { useEnableAI } from '@affine/core/components/hooks/affine/use-enable-ai';
 import { useRegisterBlocksuiteEditorCommands } from '@affine/core/components/hooks/affine/use-register-blocksuite-editor-commands';
 import { useActiveBlocksuiteEditor } from '@affine/core/components/hooks/use-block-suite-editor';
+import { LocalAIPanel } from '@affine/core/components/local-ai/panel';
 import { PageDetailEditor } from '@affine/core/components/page-detail-editor';
 import { WorkspacePropertySidebar } from '@affine/core/components/properties/sidebar';
 import { TrashPageFooter } from '@affine/core/components/pure/trash-page-footer';
@@ -34,6 +35,7 @@ import {
 } from '@affine/core/modules/workbench';
 import { WorkspaceService } from '@affine/core/modules/workspace';
 import { isNewTabTrigger } from '@affine/core/utils';
+import { NEXO_LOCAL_ONLY } from '@affine/env/constant';
 import { ServerFeature } from '@affine/graphql';
 import track from '@affine/track';
 import { DisposableGroup } from '@blocksuite/affine/global/disposable';
@@ -367,13 +369,21 @@ const DetailPageImpl = memo(function DetailPageImpl() {
         </div>
       </ViewBody>
 
-      {enableAI && (
+      {(NEXO_LOCAL_ONLY || enableAI) && (
         <ViewSidebarTab
           tabId="chat"
           icon={<AiIcon />}
           unmountOnInactive={false}
         >
-          <EditorChatPanel editor={editorContainer} doc={doc.blockSuiteDoc} />
+          {NEXO_LOCAL_ONLY ? (
+            <LocalAIPanel
+              key={doc.id}
+              doc={doc.blockSuiteDoc}
+              readonly={readonly}
+            />
+          ) : (
+            <EditorChatPanel editor={editorContainer} doc={doc.blockSuiteDoc} />
+          )}
         </ViewSidebarTab>
       )}
 

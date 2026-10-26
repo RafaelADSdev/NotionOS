@@ -104,14 +104,16 @@ const AIChatButton = () => {
     workbench.location$.selector(location => location.pathname === '/chat')
   );
 
-  if (!enableAI || !serverFeatures?.copilot) {
+  if (!NEXO_LOCAL_ONLY && (!enableAI || !serverFeatures?.copilot)) {
     return null;
   }
 
   return (
     <MenuLinkItem icon={<AiOutlineIcon />} active={aiChatActive} to={'/chat'}>
       <span data-testid="ai-chat">
-        {t['com.affine.workspaceSubPath.chat']()}
+        {NEXO_LOCAL_ONLY
+          ? 'Chat com IA'
+          : t['com.affine.workspaceSubPath.chat']()}
       </span>
     </MenuLinkItem>
   );

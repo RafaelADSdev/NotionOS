@@ -1,5 +1,13 @@
 {
   "status": "implemented-local-only",
+  "localAIUpdate": {
+    "date": "2026-10-26",
+    "request": "Restaurar assistência de IA com chave própria, sem assinatura do AFFiNE.",
+    "scope": "Chat de texto, contexto da nota por escolha explícita, resumo, revisão, tradução, copiar e acrescentar resposta à nota.",
+    "transport": "API nativa Claude/Anthropic ou compatível com OpenAI Chat Completions chamada diretamente pelo navegador; sem backend AFFiNE.",
+    "credentials": "Memória por padrão; sessionStorage por opção explícita; nunca em backups ou preferências persistentes.",
+    "documentation": "docs/local-ai.md"
+  },
   "objective": "Personalizar o AFFiNE como Nexo, preservando notas e quadros locais e removendo IA e recursos de nuvem conforme solicitação do usuário.",
   "upstream": "https://github.com/toeverything/AFFiNE",
   "baseCommit": "5f19254",
@@ -105,15 +113,8 @@
   },
   "localOnly": true,
   "appearanceAndLocale": {
-    "themes": [
-      "light",
-      "dark",
-      "system"
-    ],
-    "sidebarSwitch": [
-      "Claro",
-      "Escuro"
-    ],
+    "themes": ["light", "dark", "system"],
+    "sidebarSwitch": ["Claro", "Escuro"],
     "storageKey": "nexo-theme",
     "defaultLanguage": "pt-BR",
     "catalogKeys": 2605,

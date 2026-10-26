@@ -17,6 +17,7 @@ import { NotificationServiceImpl } from '@affine/core/blocksuite/view-extensions
 import { useAIChatConfig } from '@affine/core/components/hooks/affine/use-ai-chat-config';
 import { useAISpecs } from '@affine/core/components/hooks/affine/use-ai-specs';
 import { useAISubscribe } from '@affine/core/components/hooks/affine/use-ai-subscribe';
+import { LocalAIPanel } from '@affine/core/components/local-ai/panel';
 import {
   AIDraftService,
   AIModelService,
@@ -101,15 +102,17 @@ function useMockStd() {
 }
 
 export const Component = () =>
-  NEXO_LOCAL_ONLY ? <LocalChatRedirect /> : <ChatPage />;
+  NEXO_LOCAL_ONLY ? <LocalChatPage /> : <ChatPage />;
 
-const LocalChatRedirect = () => {
-  const workbench = useService(WorkbenchService).workbench;
-  useEffect(() => {
-    workbench.openAll();
-  }, [workbench]);
-  return null;
-};
+const LocalChatPage = () => (
+  <>
+    <ViewTitle title="Chat com IA" />
+    <ViewIcon icon="ai" />
+    <ViewBody>
+      <LocalAIPanel fullPage />
+    </ViewBody>
+  </>
+);
 
 const ChatPage = () => {
   const t = useI18n();

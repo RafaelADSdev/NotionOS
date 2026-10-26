@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('local notes and whiteboards work without AI, accounts or server requests', async ({
+test('local notes and whiteboards work with optional BYOK AI and without accounts or server requests', async ({
   page,
 }) => {
   const serverRequests: string[] = [];
@@ -17,14 +17,14 @@ test('local notes and whiteboards work without AI, accounts or server requests',
   page.on('pageerror', error => errors.push(error.message));
 
   await page.addInitScript(() => {
-    // An AI preference saved by an earlier version must not re-enable it.
+    // An old upstream flag must not enable the cloud AI transport.
     localStorage.setItem('global-state:affine-flag:enable_ai', 'true');
   });
   await page.goto('/');
   await expect(page.getByTestId('current-workspace-card')).toBeVisible();
   await expect(page).toHaveTitle('Primeiros passos no Nexo · Nexo');
   await expect(page.locator('a[href*="affine.pro"]')).toHaveCount(0);
-  await expect(page.getByTestId('ai-chat')).toHaveCount(0);
+  await expect(page.getByTestId('ai-chat')).toBeVisible();
   await expect(page.getByTestId('ai-island')).toHaveCount(0);
   await expect(page.getByTestId('local-demo-tips')).toHaveCount(0);
   await expect(page.getByTestId('right-bottom-change-log-icon')).toHaveCount(0);
@@ -87,9 +87,12 @@ test('local notes and whiteboards work without AI, accounts or server requests',
   const workspacePath = chatUrl.pathname.replace(/\/[^/]+$/, '');
   chatUrl.pathname = `${workspacePath}/chat`;
   await page.goto(chatUrl.href);
-  await expect
-    .poll(() => new URL(page.url()).pathname)
-    .toBe(`${workspacePath}/all`);
+  await expect(
+    page.getByRole('region', { name: 'Assistente de IA do Nexo' })
+  ).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: 'Enviar', exact: true })
+  ).toBeDisabled();
   await expect(page.getByTestId('ai-island')).toHaveCount(0);
   expect(serverRequests).toEqual([]);
   expect(errors).toEqual([]);
